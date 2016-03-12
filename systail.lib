@@ -1,0 +1,9 @@
+main proc
+	invoke fuse
+	;invoke print_num,eax
+	invoke inputcha
+	invoke inputcha
+	ret
+main endp
+
+end main

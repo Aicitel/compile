@@ -1,0 +1,585 @@
+LEETCODE CASE
+----------------
+----------------
+test case 1 roman to number
+----------------
+DEF string AS CHARACTER[128]!
+DEF len AS NUM!
+DEF tonumber(CHARACTER char) AS NUM{
+	?(char='I'){
+		RET 1!
+	}!
+	?(char='V'){
+		RET 5!
+	}!
+	?(char='X'){
+		RET 10!
+	}!
+	?(char='L'){
+		RET 50!
+	}!
+	?(char='C'){
+		RET 100!
+	}!
+	?(char='D'){
+		RET 500!
+	}!
+	?(char='M'){
+		RET 1000!
+	}!
+	RET 0!
+}!
+DEF romantoint(CHARACTER[] s) AS NUM{
+	DEF ret AS NUM!
+	LET ret AS tonumber(s[0])!
+	DEF i AS NUM!
+	LET i AS 1!
+	DEF prev AS NUM!
+	DEF succ AS NUM!
+	LOOP(i<len){
+		printcha('a')!
+		printcha(32)!
+		LET prev AS tonumber(s[i-1])!
+		LET succ AS tonumber(s[i])!
+		?(prev<succ){
+			LET ret AS succ-ret!
+		}!
+		?(prev>=succ){
+			LET ret AS ret+succ!
+		}!
+		LET i AS i+1!
+	}!
+	RET ret!
+}!
+DEF fuse() AS NUM{
+	DEF i AS NUM!
+	LET len AS inputnum()!
+	DEF ctemp AS CHARACTER!
+	LET i AS 0!
+	LOOP(i<len)
+	{
+		LET ctemp  AS inputcha()!
+		LET string[i] AS ctemp!
+		LET i AS i+1!
+	}!
+	DEF result AS NUM!
+	LET result AS romantoint(string)!
+	
+	LET i AS 0!
+	printcha(10)!
+	printnum(result)!
+	RET 0!
+}!
+------------------
+test case 2 twosum
+------------------
+
+DEF array AS NUM[128]!
+DEF len AS NUM!
+
+DEF fuse() AS NUM{
+	DEF sum AS NUM!
+	LET sum AS inputnum()!
+	DEF i AS NUM!
+	LET i AS 0!
+	DEF j AS NUM!
+	LET j AS 0!
+	DEF ad AS NUM!
+	LET len AS inputnum()!
+	LOOP(i<len)
+	{
+		LET j AS inputnum()!
+		LET array[i] AS j!
+		LET i AS i+1!
+	}!
+	LET i AS 0!
+	LET j AS 0!
+	LOOP(i<len)
+	{
+		LOOP(j<len){
+			LET ad AS array[i]!
+			LET ad AS array[j]+ad!
+			?(ad=sum AND i<j)
+			{	printnum(array[i])!
+				printcha(32)!
+				printnum(array[j])!
+				printcha(10)!
+				RET 0!
+			}!
+			?(ad=sum AND i>j)
+			{	printnum(array[i])!
+				printcha(32)!
+				printnum(array[j])!
+				printcha(10)!
+				RET 0!
+			}!
+			LET j AS j+1!
+		}!
+		LET j AS 0!
+		LET i AS i+1!
+	}!
+	RET 0!
+}!
+---------------------------------
+testcase 3 atoi
+-------------------------------
+DEF fuse() AS NUM{
+	DEF n AS NUM!
+	DEF result AS NUM!
+	LET result AS 0!
+	LET n AS inputnum()!
+	DEF input AS CHARACTER[10]!
+	DEF i AS NUM!
+	LET i AS inputcha()!
+	LET i AS 0!
+	LOOP(i<n){
+		DEF c AS CHARACTER!
+		LET c AS inputcha()!
+		LET input[i] AS c!
+
+		LET i AS i+1!
+	}!
+	DEF base AS NUM!
+	DEF cnt AS NUM!
+	DEF cntsub AS NUM!
+	DEF cntres AS NUM!
+	LET base AS 1!
+	LET i AS 0!
+	LOOP(i<n){
+		LET cnt AS input[n-i-1]!
+		LET cntsub AS cnt-48!
+		LET cntres AS cntsub*base!
+		LET result AS result+cntres!	
+		LET base AS base*10!
+		LET i AS i+1!
+	}!
+	printnum(result)!
+	LET i AS inputnum()!
+	RET 0!
+}!
+---------------
+---------------
+Normal testcase
+---------------
+---------------
+TARGET CASE quicksort:
+-----------------------------------------------------------------
+DEF array AS NUM[10]!
+DEF len AS NUM!
+
+DEF quicksort(NUM[] s,NUM l,NUM r) AS NUM{
+	DEF i AS NUM!
+	DEF j AS NUM!
+	DEF x AS NUM!
+	?(l<r)
+	{
+		LET i AS l!
+		LET j AS r!
+		LET x AS s[l]!
+		LOOP(i<j){
+			LOOP(i<j AND s[j]>=x){LET j AS j-1!}!
+			?(i<j){LET s[i] AS s[j]! LET i AS i+1!}!
+			LOOP(i<j AND s[i]< x){LET i AS i+1!}!
+			?(i<j){LET s[j] AS s[i]! LET j AS j-1!}!
+		}!
+		LET s[i] AS x!
+		quicksort(s, l, i - 1)!
+		quicksort(s, i + 1, r)!
+	}!
+	RET 0!
+}!
+
+DEF fuse() AS NUM{
+	LET len AS 10!
+	LET array AS {2,4,1,55,12,4,0,6,1,5}!
+	quicksort(array,0,len-1)!
+	DEF a AS NUM!
+	LET a AS 0!
+	LOOP(a<10){
+		printnum(array[a])!
+		printspace()!
+		LET a AS a+1!
+	}!
+	RET 0!
+}!
+--------------------------------------------------------------------
+------------------------------------------------------------------
+TEST CASE 1(normal function call) 
+--------------------------------------------------------------------
+DEF a(NUM b, NUM varc) AS NUM{
+	DEF d AS NUM!
+	DEF f AS FLOAT!
+	LET b AS varc!
+	RET b!
+}!
+	
+DEF main() AS NUM{
+	DEF res AS NUM!
+	DEF len AS NUM!
+	LET len AS 10!
+	LET res AS a(len,len-1)!
+	RET res!
+}!
+
+
+--------------------------------------------------------------------
+------------------------------------------------------------------
+TEST CASE 2(include array)
+--------------------------------------------------------------------
+DEF a(NUM[] b, NUM c) AS NUM{
+	DEF d AS NUM!
+	DEF f AS FLOAT!
+	LET b[0] AS c!
+	RET b[0]!
+}!
+	
+DEF fuse() AS NUM{
+	DEF a AS FLOAT!
+	LET a AS 1.0!
+	DEF array AS FLOAT[2]!	
+	LET array AS {a,2.0}!
+	LET array[0] AS 2.2!
+	RET 0!
+}!
+--------------------------------------------------------------------
+------------------------------------------------------------------
+TEST CASE 3(include array)
+--------------------------------------------------------------------
+DEF a(NUM[] b, NUM c) AS NUM{
+	DEF d AS NUM!
+	DEF f AS FLOAT!
+	LET b[0] AS c!
+	RET b[0]!
+}!
+	
+DEF main() AS NUM{
+	DEF res AS NUM!
+	DEF len AS NUM!
+	LET len AS 10!
+	DEF i AS NUM!
+	LET i AS 1!
+	LOOP(i>5){
+		LET len AS a(len,len-1)!
+		LET i AS i+1!
+	}!
+	RET len!
+}!
+--------------------------------------------------------------------
+------------------------------------------------------------------
+TEST CASE 4(new judge mode)
+--------------------------------------------------------------------
+DEF main() AS NUM{
+	DEF i AS NUM!
+	LET i AS 5!
+	?(i<(2+4*4) AND i>(5-2))
+	{
+		LET i AS 10!
+	}!
+	RET i!
+}!
+--------------------------------------------------------------------
+------------------------------------------------------------------
+TEST CASE 5(address use)
+--------------------------------------------------------------------
+DEF a(NUM b) AS NUM{
+	LET b AS 5!
+	RET b!
+}!
+DEF main() AS NUM{
+	DEF i AS NUM!
+	LET i AS 10!	
+	a(i)!
+	RET i!
+}!
+--------------------------------------------------------------------
+------------------------------------------------------------------
+TEST CASE 6(loop of loop)
+--------------------------------------------------------------------
+DEF a(NUM[] s,NUM l,NUM r) AS NUM{
+	DEF ll AS NUM!
+	DEF rr AS NUM!
+	?(l<r)
+	{
+		LET ll AS l!
+		LET rr AS r!
+		LOOP(ll<rr){
+			LOOP(i<j){LET j AS j-1!}!
+		}!
+	}!
+}!
+----------------------
+TEST CASE 7 （string）
+------------------------
+DEF printcha(NUM s ) AS NUM{
+	RET 0!
+}!
+DEF fuse() AS NUM{
+	DEF string AS CHARACTER[12]!
+	LET string[0] AS 104!
+	LET string[1] AS 101!
+	LET string[2] AS 108!
+	LET string[3] AS 108!
+	LET string[4] AS 111!
+	LET string[5] AS 32!
+	LET string[6] AS 119!
+	LET string[7] AS 111!
+	LET string[8] AS 114!
+	LET string[9] AS 108!
+	LET string[10] AS 100!
+	LET string[11] AS 33!
+	DEF i AS NUM!
+	LET i AS 0!
+	RET 0!
+}!
+----------------------------
+TEST CASE 8 (float +-*/)
+---------------------------
+DEF fuse() AS FLOAT{
+	DEF a AS NUM!
+	LET a AS 2!
+	RET a!
+}!
+
+----------------------------
+TEST CASE 9 (float ><)
+---------------------------
+DEF fuse() AS FLOAT{
+	DEF a AS FLOAT!
+	?(1.2<1.6){
+		LET a AS (2.2+2.4*2.0)*2.0!
+	}!
+	RET a!
+}!
+-------------------------------
+TEST CASE 10 qs input output
+-------------------------------
+DEF array AS NUM[10]!
+DEF len AS NUM!
+DEF printa(NUM[] s,NUM len) AS NUM
+{
+	DEF i AS NUM!
+	LET i AS 0!
+	LOOP(i<len){
+		printnum(s[i])!
+		printspace()!
+		LET i AS i+1!
+	}!	
+	RET 0!
+}!
+DEF quicksort(NUM[] s,NUM l,NUM r) AS NUM{
+	?(l<r)
+	{
+		DEF i AS NUM!
+		LET i AS l!
+		DEF j AS NUM!
+		LET j AS r!
+		DEF x AS NUM!
+		LET x AS s[l]!
+		LOOP(i<j){
+			LOOP(i<jANDs[j]>=x){LET j AS j-1!}!
+			?(i<j){LET s[i] AS s[j]! LET i AS i+1!}!
+			LOOP(i<jANDs[i]< x){LET i AS i+1!}!
+			?(i<j){LET s[j] AS s[i]! LET j AS j-1!}!
+		}!
+		LET s[i] AS x!
+		quicksort(s, l, i - 1)!
+		quicksort(s, i + 1, r)!
+	}!
+	RET 0!
+}!
+
+DEF inputnum() AS NUM{
+	RET 0!
+}!
+DEF fuse() AS NUM{
+	DEF i AS NUM!
+	LET i AS 0!
+	LOOP(i<10)
+	{
+		LET array[i] AS inputnum()!
+		LET i AS i+1!
+	}!
+	LET len AS 10!
+	quicksort(array,0,len-1)!
+	printa(array,10)!
+	RET 0!
+}!
+---------------------------------
+TEST CASE 11 NUM&FLOAT
+---------------------------------
+DEF fuse() AS NUM{
+	DEF i AS NUM!
+	LET i AS 0!
+	DEF j AS FLOAT!
+	LET j AS 2.2!
+	?(i<j){LET i AS 1!}!
+	printnum(i)!
+	RET 0!
+}!
+----------------------------
+TEST CASE 12 NUM&FLOAT +-
+---------------------------------
+DEF fuse() AS NUM{
+	DEF i AS FLOAT!
+	LET i AS 1.1+2.2!
+	?(i>2.3){printflo(i)!}!
+	RET 0!
+}!
+
+----------------------------
+TEST CASE 13 GLOBAL FLOAT ARRAY
+---------------------------------
+DEF floats AS FLOAT[2]!
+DEF gol(FLOAT[] s) AS NUM{
+	LET s[0] AS 1.1+2.2!
+	printflo(floats[0])!
+	RET 0!
+}!
+DEF fuse() AS NUM{
+	gol(floats)!
+	RET 0!
+}!
+
+----------------------------
+TEST CASE 14 quicksort float
+----------------------------
+DEF array AS FLOAT[128]!
+DEF len AS NUM!
+DEF printa(FLOAT[] s,NUM len) AS NUM
+{
+	DEF i AS NUM!
+	LET i AS 0!
+	LOOP(i<len){
+		printflo(s[i])!
+		printspace()!
+		LET i AS i+1!
+	}!	
+	RET 0!
+}!
+DEF quicksort(FLOAT[] s,NUM l,NUM r) AS NUM{
+	?(l<r)
+	{
+		DEF i AS NUM!
+		LET i AS l!
+		DEF j AS NUM!
+		LET j AS r!
+		DEF x AS FLOAT!
+		LET x AS s[l]!
+		LOOP(i<j){
+			LOOP(i<jANDs[j]>=x){LET j AS j-1!}!
+			?(i<j){LET s[i] AS s[j]! LET i AS i+1!}!
+			LOOP(i<jANDs[i]< x){LET i AS i+1!}!
+			?(i<j){LET s[j] AS s[i]! LET j AS j-1!}!
+		}!
+		LET s[i] AS x!
+		quicksort(s, l, i - 1)!
+		quicksort(s, i + 1, r)!
+	}!
+	RET 0!
+}!
+
+DEF fuse() AS NUM{
+	DEF i AS NUM!
+	LET i AS 0!
+	DEF j AS FLOAT!
+	LET len AS inputnum()!
+	LOOP(i<len)
+	{
+		LET j AS inputflo()!
+		LET array[i] AS j!
+		LET i AS i+1!
+	}!
+	quicksort(array,0,len-1)!
+	printa(array,len)!
+	RET 0!
+}!
+-------------------------
+TEST CASE 15 eight queens
+-------------------------
+DEF line AS NUM[8]!
+DEF answer AS NUM!
+DEF show() AS NUM
+{
+	DEF i AS NUM!
+	DEF j AS NUM!
+	LET i AS 0!
+	LET j AS 0!
+	LOOP(i<8)
+	{
+		LOOP(j<8)
+		{
+			?(line[i]=j){printcha(81)!}!
+			?(line[i]>j OR line[i]<j){printcha(42)!}!
+			LET j AS j+1!
+		}!
+		LET j AS 0!
+		printcha(10)!
+		LET i AS i+1!
+	}!
+	LET answer AS answer+1!
+	printnum(answer)!
+	printcha(10)!
+	inputcha()!
+	RET 0!
+}!
+DEF judge(NUM n) AS NUM
+{
+	DEF i AS NUM!
+	LET i AS 0!
+	LOOP(i<n)
+	{
+		?(line[n]=line[i]){RET 1!}!
+		?(line[n]-n=line[i]-i){RET 1!}!
+		?(line[n]+n=line[i]+i){RET 1!}!
+		LET i AS i+1!
+	}!
+	RET 0!
+}!
+DEF control(NUM n) AS NUM
+{
+	DEF k AS NUM!
+	LET k AS 8!
+	DEF temp AS NUM!
+	LET line[n] AS 0!
+	LOOP(line[n]<k)
+	{
+		LET temp AS judge(n)!
+		?(temp =0)
+		{
+			?(n>7 OR n<7){control(n+1)!}!
+			?(n=7){show()!}!
+		}!
+		LET line[n] AS line[n]+1!
+	}!
+	RET 0!
+}!
+DEF fuse() AS NUM{
+	control(0)!
+	RET 0!
+}!
+
+---------------------
+DEF fuse() AS NUM{
+	DEF a AS NUM!
+	LET a AS 20!
+	DEF b AS NUM!
+	LET b AS 5!
+	DEF res AS NUM!
+	LET res AS a/b!
+	printnum(res)!
+	RET 0!
+}
+---------------------
+DEF fuse() AS NUM{
+	DEF a AS NUM!
+	LET a AS 20!
+	DEF b AS NUM!
+	LET b AS 5!
+	DEF res AS FLOAT!
+	LET res AS a/0.2!
+	printflo(res)!
+	RET 0!
+}!
+
+
+
