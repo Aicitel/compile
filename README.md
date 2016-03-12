@@ -203,7 +203,3 @@ main endp
 end main
 ``` 
 
-## contrust
-- mail?￡?oncnxj5@163.com
-- github
-
